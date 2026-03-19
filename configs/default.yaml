@@ -1,0 +1,27 @@
+pipeline:
+  name: "Speech_NLP_Pipeline"
+  version: "1.0.0"
+
+audio:
+  sample_rate: 16000
+  segment_length_sec: 30
+  noise_augmentation: true
+  noise_level: 0.05
+
+transcription:
+  model_name: "base"
+  device: "cpu" # or "cuda"
+  language: "en"
+  batch_size: 8
+
+nlp:
+  intent_model: "facebook/bart-large-mnli"
+  candidate_labels: ["support", "billing", "technical", "general inquiry"]
+  ner_model: "dslim/bert-base-NER"
+
+explainability:
+  enable_shap: true
+  max_samples: 100
+
+tracking:
+  experiment_name: "speech_nlp_baseline"
